@@ -12,7 +12,7 @@ export default function HomePage() {
         <div className="absolute inset-0 grid-pattern"></div>
         <div className="container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-6xl font-bold mb-6 heading-gradient">
+            <h1 className="text-6xl font-bold mb-6 gradient-text">
               Welcome to my digital world
             </h1>
             <p className="text-xl text-gray-600 mb-8">
@@ -34,7 +34,7 @@ export default function HomePage() {
       {/* Latest Notes Section */}
       <section className="py-24 bg-gray-50">
         <div className="container">
-          <h2 className="text-3xl font-bold mb-8 heading-gradient">Latest Notes</h2>
+          <h2 className="text-3xl font-bold mb-8 gradient-text">Latest Notes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="card">
               <h3 className="text-xl font-semibold mb-2">CSS Grid Techniques</h3>
@@ -56,7 +56,7 @@ export default function HomePage() {
       {/* Featured Projects Section */}
       <section className="py-24">
         <div className="container">
-          <h2 className="text-3xl font-bold mb-8 heading-gradient">Featured Projects</h2>
+          <h2 className="text-3xl font-bold mb-8 gradient-text">Featured Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="card">
               <h3 className="text-xl font-semibold mb-2">Project One</h3>

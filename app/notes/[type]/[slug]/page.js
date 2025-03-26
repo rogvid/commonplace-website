@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
-import { getContentBySlug } from '@/lib/mdx';
-import { ContentTypeInfo } from '@/app/data/contentTypes';
+import { ContentTypeInfo, getContentMetadata } from '@/app/lib/content';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 
 export default async function NotePage({ params: { type, slug } }) {
   if (!ContentTypeInfo[type]) {
@@ -8,7 +8,7 @@ export default async function NotePage({ params: { type, slug } }) {
     notFound();
   }
 
-  const post = await getContentBySlug(type, slug);
+  const post = await getContentMetadata(type, slug);
   const contentType = ContentTypeInfo[type];
 
   if (!post) {
@@ -28,22 +28,22 @@ export default async function NotePage({ params: { type, slug } }) {
               </span>
             </div>
             <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-              {post.frontmatter.title}
+              {post.title}
             </h1>
             <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 mb-6">
-              <time dateTime={post.frontmatter.date}>
-                {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+              <time dateTime={post.date}>
+                {new Date(post.date).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric'
                 })}
               </time>
               <span>•</span>
-              <span>{post.frontmatter.readingTime.text}</span>
+              <span>{post.readTime}</span>
             </div>
-            {post.frontmatter.tags && (
+            {post.tags && (
               <div className="flex flex-wrap gap-2">
-                {post.frontmatter.tags.map((tag) => (
+                {post.tags.map((tag) => (
                   <span
                     key={tag}
                     className={`px-2.5 py-0.5 bg-${contentType.color}-50 dark:bg-${contentType.color}-900/20 
@@ -57,7 +57,7 @@ export default async function NotePage({ params: { type, slug } }) {
           </header>
 
           <div className="prose prose-lg dark:prose-invert max-w-none">
-            {post.content}
+            <MDXRemote source={post.content} />
           </div>
         </div>
       </article>

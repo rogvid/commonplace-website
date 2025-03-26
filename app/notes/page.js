@@ -1,19 +1,13 @@
-import { getAllContent } from '../../lib/mdx';
+import { ContentTypes, getAllContent } from '../lib/content';
 import NotesPageClient from './NotesPageClient';
 
 export default async function NotesPage() {
-  const blogPosts = await getAllContent('blog');
-  const reports = await getAllContent('reports');
-  const tifs = await getAllContent('tif');
-  const tils = await getAllContent('til');
-  const reviews = await getAllContent('reviews');
-
   const contentTypes = [
-    { type: 'blog', title: 'Blog Posts', content: blogPosts },
-    { type: 'reports', title: 'Technical Reports', content: reports },
-    { type: 'tif', title: 'Things I Found', content: tifs },
-    { type: 'til', title: 'Things I Learned', content: tils },
-    { type: 'reviews', title: 'Reviews', content: reviews },
+    { type: ContentTypes.BLOG, title: 'Blog Posts', content: await getAllContent(ContentTypes.BLOG) },
+    { type: ContentTypes.REPORT, title: 'Technical Reports', content: await getAllContent(ContentTypes.REPORT) },
+    { type: ContentTypes.TIF, title: 'Things I Found', content: await getAllContent(ContentTypes.TIF) },
+    { type: ContentTypes.TIL, title: 'Things I Learned', content: await getAllContent(ContentTypes.TIL) },
+    { type: ContentTypes.REVIEW, title: 'Reviews', content: await getAllContent(ContentTypes.REVIEW) },
   ];
 
   return <NotesPageClient initialContent={contentTypes} />;

@@ -1,6 +1,14 @@
 # My Portfolio Website
 
-A modern, responsive portfolio website built with Next.js, React, and Tailwind CSS.
+A modern, responsive portfolio website built with Next.js, React, and Tailwind CSS. This project was developed using Cursor IDE, leveraging AI-assisted development through Vibe coding. The initial plan was created using ChatGPT, and the implementation was guided and reviewed by the developer while Cursor handled the coding tasks.
+
+## Development Process
+
+This website was developed using an innovative approach:
+1. Initial planning and architecture design using ChatGPT
+2. Implementation using Cursor IDE with Vibe coding
+3. Continuous review and guidance from the developer
+4. Iterative improvements and refinements
 
 ## Features
 

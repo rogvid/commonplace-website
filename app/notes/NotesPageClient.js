@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ContentTypeInfo } from '../data/contentTypes';
+import { ContentTypeInfo } from '../lib/content';
 
 export default function NotesPageClient({ initialContent }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -11,17 +11,17 @@ export default function NotesPageClient({ initialContent }) {
 
   // Get all unique tags from all content
   const allTags = [...new Set(initialContent.flatMap(({ content }) => 
-    content.flatMap(post => post.frontmatter.tags || [])
+    content.flatMap(post => post.tags || [])
   ))].sort();
 
   // Filter content based on search query, type, and tag
   const filteredContent = initialContent.map(section => ({
     ...section,
     content: section.content.filter(post => {
-      const matchesSearch = (post.frontmatter.title?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
-                          (post.frontmatter.description?.toLowerCase() || '').includes(searchQuery.toLowerCase());
+      const matchesSearch = (post.title?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
+                          (post.excerpt?.toLowerCase() || '').includes(searchQuery.toLowerCase());
       const matchesType = !selectedType || section.type === selectedType;
-      const matchesTag = !selectedTag || post.frontmatter.tags?.includes(selectedTag);
+      const matchesTag = !selectedTag || post.tags?.includes(selectedTag);
       return matchesSearch && matchesType && matchesTag;
     })
   }));
@@ -29,14 +29,14 @@ export default function NotesPageClient({ initialContent }) {
   // Flatten all content into a single array for display
   const allFilteredContent = filteredContent
     .flatMap(section => section.content.map(post => ({ ...post, type: section.type })))
-    .sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
       <section className="container mx-auto px-4 pt-24 pb-16">
         <div className="max-w-4xl">
-          <h1 className="text-5xl font-bold mb-6 heading-gradient">
+          <h1 className="text-5xl font-bold mb-6 gradient-text">
             Notes & Writing
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
@@ -129,24 +129,24 @@ export default function NotesPageClient({ initialContent }) {
                   </div>
                   <h3 className={`text-xl font-semibold mb-2 text-gray-900 dark:text-white 
                     group-hover:text-${info.color}-600 dark:group-hover:text-${info.color}-400 transition-colors`}>
-                    {post.frontmatter.title}
+                    {post.title}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
-                    {post.frontmatter.description}
+                    {post.excerpt}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-                    <time dateTime={post.frontmatter.date}>
-                      {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                    <time dateTime={post.date}>
+                      {new Date(post.date).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric'
                       })}
                     </time>
-                    <span>{post.frontmatter.readingTime.text}</span>
+                    <span>{post.readTime}</span>
                   </div>
-                  {post.frontmatter.tags && (
+                  {post.tags && (
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {post.frontmatter.tags.map((tag) => (
+                      {post.tags.map((tag) => (
                         <span
                           key={tag}
                           className={`px-2.5 py-0.5 bg-${info.color}-50 dark:bg-${info.color}-900/20 

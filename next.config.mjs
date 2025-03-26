@@ -9,6 +9,8 @@ const nextConfig = {
     serverComponentsExternalPackages: ['gray-matter'],
     serverActions: true,
   },
+  // Use standalone output for better optimization
+  output: 'standalone',
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // Don't resolve 'fs' module on the client to prevent this error
