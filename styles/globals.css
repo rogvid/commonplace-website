@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cyber-black text-white;
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .cyber-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .cyber-button {
+    @apply px-4 py-2 rounded-sm border border-cyber-blue/30 bg-cyber-blue/10 
+           text-cyber-blue hover:bg-cyber-blue/20 transition-colors duration-200
+           shadow-neon-blue hover:shadow-neon-pink;
+  }
+  
+  .cyber-header-link {
+    @apply text-cyber-gray hover:text-cyber-blue transition-colors duration-200
+           relative after:absolute after:bottom-0 after:left-0 after:w-0
+           after:h-0.5 after:bg-cyber-blue after:transition-all after:duration-200
+           hover:after:w-full;
+  }
+  
+  .cyber-header-link.active {
+    @apply text-cyber-blue after:w-full;
+  }
+  
+  .cyber-card {
+    @apply bg-cyber-black/50 border border-cyber-blue/20 rounded-sm p-6
+           hover:border-cyber-blue/40 transition-colors duration-200
+           shadow-neon-blue hover:shadow-neon-pink;
+  }
+} 

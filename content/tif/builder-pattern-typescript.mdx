@@ -1,0 +1,86 @@
+---
+title: 'Interesting Pattern: The Builder Pattern in TypeScript'
+excerpt: 'Found a great example of the Builder pattern implementation in TypeScript that simplifies complex object creation.'
+date: '2024-03-18'
+tags: ['TypeScript', 'Design Patterns']
+---
+
+# The Builder Pattern in TypeScript
+
+Found this elegant implementation of the Builder pattern in TypeScript while researching design patterns. It's particularly useful for creating complex objects with many optional parameters.
+
+## The Pattern
+
+```typescript
+class Pizza {
+  private toppings: string[] = [];
+  private sauce?: string;
+  private crust?: string;
+  private size?: 'small' | 'medium' | 'large';
+
+  constructor(builder: PizzaBuilder) {
+    this.toppings = builder.toppings;
+    this.sauce = builder.sauce;
+    this.crust = builder.crust;
+    this.size = builder.size;
+  }
+}
+
+class PizzaBuilder {
+  toppings: string[] = [];
+  sauce?: string;
+  crust?: string;
+  size?: 'small' | 'medium' | 'large';
+
+  addTopping(topping: string): PizzaBuilder {
+    this.toppings.push(topping);
+    return this;
+  }
+
+  withSauce(sauce: string): PizzaBuilder {
+    this.sauce = sauce;
+    return this;
+  }
+
+  withCrust(crust: string): PizzaBuilder {
+    this.crust = crust;
+    return this;
+  }
+
+  withSize(size: 'small' | 'medium' | 'large'): PizzaBuilder {
+    this.size = size;
+    return this;
+  }
+
+  build(): Pizza {
+    return new Pizza(this);
+  }
+}
+```
+
+## Usage Example
+
+```typescript
+const pizza = new PizzaBuilder()
+  .withSize('large')
+  .withCrust('thin')
+  .withSauce('tomato')
+  .addTopping('cheese')
+  .addTopping('mushrooms')
+  .build();
+```
+
+## Why It's Interesting
+
+1. Type-safe construction
+2. Fluent interface
+3. Clear parameter naming
+4. Flexible object creation
+
+## Source
+Found in this great article about TypeScript patterns: [link]
+
+## Related Patterns
+- Factory Method
+- Abstract Factory
+- Prototype 

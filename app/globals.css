@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '../styles/theme.css';
+
+:root {
+  --foreground-rgb: 17, 24, 39;
+  --background-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  min-height: 100vh;
+  font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv03" on;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+}
+
+.card {
+  @apply bg-white border border-gray-200 rounded-lg p-6 shadow-sm
+         hover:border-gray-300 hover:shadow-md transition-all duration-200;
+}
+
+/* Navigation Links */
+.nav-link {
+  @apply text-gray-600 hover:text-indigo-600 transition-colors duration-200 font-medium inline-block py-1;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.nav-link-active {
+  @apply text-indigo-600 font-semibold;
+  line-height: 1.5;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply tracking-tight font-bold text-gray-900;
+}
+
+p {
+  @apply leading-relaxed text-gray-600;
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent;
+}
+
+/* Grid background */
+.grid-pattern {
+  background-image: linear-gradient(to right, rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.3;
+} 

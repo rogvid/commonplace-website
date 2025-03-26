@@ -1,0 +1,87 @@
+---
+title: 'Book Review: "Clean Architecture" by Robert C. Martin'
+excerpt: 'My thoughts on Uncle Bob\'s Clean Architecture book and how its principles can be applied in modern web development.'
+date: '2024-03-10'
+tags: ['Books', 'Architecture', 'Clean Code']
+rating: 4.5
+mediaType: 'book'
+author: 'Robert C. Martin'
+---
+
+# Book Review: Clean Architecture
+
+## Quick Summary
+- **Title**: Clean Architecture: A Craftsman's Guide to Software Structure and Design
+- **Author**: Robert C. Martin (Uncle Bob)
+- **Rating**: 4.5/5
+- **Reading Time**: ~8 hours
+- **Target Audience**: Mid to Senior level developers
+
+## What I Liked
+
+### 1. Clear Principles
+The book excellently explains the SOLID principles:
+- Single Responsibility
+- Open-Closed
+- Liskov Substitution
+- Interface Segregation
+- Dependency Inversion
+
+### 2. Practical Examples
+```java
+// Bad: High coupling
+class OrderProcessor {
+    private MySQLDatabase db;
+    
+    public void processOrder(Order order) {
+        db.save(order);
+    }
+}
+
+// Good: Dependency Inversion
+class OrderProcessor {
+    private DatabaseInterface db;
+    
+    public OrderProcessor(DatabaseInterface db) {
+        this.db = db;
+    }
+    
+    public void processOrder(Order order) {
+        db.save(order);
+    }
+}
+```
+
+### 3. Modern Relevance
+Despite being written before the rise of microservices and serverless, the principles apply perfectly to modern architectures.
+
+## What Could Be Better
+
+1. More JavaScript/TypeScript examples
+2. Cloud architecture considerations
+3. Microservices-specific guidance
+
+## Key Takeaways
+
+1. Architecture is about boundaries
+2. Dependencies should point inward
+3. Business rules should be isolated
+4. Framework decisions are details
+
+## Should You Read It?
+
+Yes, if you:
+- Want to understand architectural principles
+- Need to make better system design decisions
+- Work on large-scale applications
+
+No, if you:
+- Are just starting programming
+- Need framework-specific guidance
+- Want quick, practical solutions
+
+## Related Resources
+
+- Clean Code (same author)
+- Domain-Driven Design by Eric Evans
+- Patterns of Enterprise Application Architecture by Martin Fowler 

@@ -1,0 +1,147 @@
+/**
+ * Catppuccin Mocha theme for Prism.js
+ */
+
+:root {
+  --mocha-base: #1e1e2e;
+  --mocha-surface0: #313244;
+  --mocha-text: #cdd6f4;
+}
+
+pre[class*="language-"],
+code[class*="language-"] {
+  color: var(--mocha-text);
+  background: var(--mocha-base);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  font-size: 0.9em;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  border-radius: 0.5rem;
+}
+
+/* Override Tailwind prose styles */
+.prose pre {
+  background-color: var(--mocha-base) !important;
+  color: var(--mocha-text) !important;
+  border: 1px solid var(--mocha-surface0);
+  margin: 1.5em 0;
+}
+
+.prose code {
+  background-color: var(--mocha-base) !important;
+  color: var(--mocha-text) !important;
+  font-weight: normal !important;
+}
+
+pre[class*="language-"] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*="language-"] {
+  padding: 0.2em 0.3em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6c7086; /* overlay0 */
+}
+
+.token.punctuation {
+  color: #bac2de; /* subtext1 */
+}
+
+.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f38ba8; /* red */
+}
+
+.token.boolean,
+.token.number {
+  color: #fab387; /* peach */
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #a6e3a1; /* green */
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #f5c2e7; /* pink */
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #cba6f7; /* mauve */
+}
+
+.token.function,
+.token.class-name {
+  color: #89b4fa; /* blue */
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #f9e2af; /* yellow */
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* Line numbers */
+.line-numbers .line-numbers-rows {
+  border-right: 1px solid #45475a; /* surface1 */
+  padding: 1em 0;
+}
+
+.line-numbers-rows > span:before {
+  color: #7f849c; /* overlay1 */
+}
+
+/* Line highlighting */
+.line-highlight {
+  background: rgba(205, 214, 244, 0.1); /* text with alpha */
+} 

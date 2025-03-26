@@ -1,0 +1,83 @@
+---
+title: 'TIL: Optimizing React Re-renders'
+excerpt: 'Today I learned about some non-obvious ways React components can trigger unnecessary re-renders and how to fix them.'
+date: '2024-03-15'
+tags: ['React', 'Performance']
+---
+
+# TIL: Optimizing React Re-renders
+
+Today I learned about some surprising ways React components can trigger unnecessary re-renders. Here's a quick summary of what I discovered while debugging a performance issue.
+
+## The Problem
+
+I had a component that was re-rendering way too often:
+
+```jsx
+function UserList({ users }) {
+  const [filter, setFilter] = useState("");
+  
+  const filterUsers = () => {
+    return users.filter(user => 
+      user.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
+  return (
+    <div>
+      <input 
+        value={filter} 
+        onChange={e => setFilter(e.target.value)} 
+      />
+      {filterUsers().map(user => (
+        <UserCard key={user.id} user={user} />
+      ))}
+    </div>
+  );
+}
+```
+
+## What I Learned
+
+1. The `filterUsers` function was being recreated on every render
+2. Each recreation caused all `UserCard` components to re-render
+3. The filter operation was running even when users hadn't changed
+
+## The Solution
+
+```jsx
+function UserList({ users }) {
+  const [filter, setFilter] = useState("");
+  
+  const filterUsers = useMemo(() => {
+    return users.filter(user => 
+      user.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  }, [users, filter]);
+
+  return (
+    <div>
+      <input 
+        value={filter} 
+        onChange={e => setFilter(e.target.value)} 
+      />
+      {filterUsers.map(user => (
+        <UserCard key={user.id} user={user} />
+      ))}
+    </div>
+  );
+}
+```
+
+## Key Takeaways
+
+1. Use `useMemo` for expensive computations
+2. Watch out for function recreations
+3. Consider memoizing child components
+4. Profile before optimizing
+
+## Resources
+
+- React DevTools Performance tab
+- [React docs on performance](https://reactjs.org/docs/optimizing-performance.html)
+- Chrome Performance profiler 
