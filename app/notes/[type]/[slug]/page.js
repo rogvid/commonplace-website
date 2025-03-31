@@ -53,10 +53,9 @@ export default async function NotePage({ params: { type, slug } }) {
     <main className="min-h-screen bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-[88ch,35ch] gap-8 max-w-[125ch] mx-auto relative">
-          <article className="min-h-[calc(100vh-8rem)] max-w-[88ch]">
-                
-
+          <article className="min-h-[calc(100vh-8rem)] max-w-[88ch] mr-[6ch]">
             <div className="prose prose-lg dark:prose-invert max-w-none
+              prose-headings:text-[rgb(var(--color-primary))] dark:prose-headings:text-[rgb(var(--color-primary))]
               prose-table:w-full 
               prose-table:border-collapse 
               prose-table:border-spacing-0
