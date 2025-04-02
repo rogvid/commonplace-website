@@ -19,7 +19,7 @@ export const projects = [
     github: 'https://github.com/yourusername/ai-image-generator',
     demo: 'https://ai-image-generator-demo.com',
     featured: true,
-    blogPost: '/notes/blog/creating-ai-image-generator'
+    blogPost: '/notes/blog/wip'
   },
   {
     title: 'Task Management App',
@@ -30,7 +30,7 @@ export const projects = [
     github: 'https://github.com/yourusername/task-manager',
     demo: 'https://task-manager-demo.com',
     featured: false,
-    blogPost: '/notes/blog/building-task-management-app'
+    blogPost: '/notes/blog/wip'
   },
   {
     title: 'Weather Forecast App',
@@ -41,7 +41,7 @@ export const projects = [
     github: 'https://github.com/yourusername/weather-app',
     demo: 'https://weather-app-demo.com',
     featured: false,
-    blogPost: '/notes/blog/creating-weather-forecast-app'
+    blogPost: '/notes/blog/wip'
   },
   {
     title: 'E-commerce Platform',
@@ -52,7 +52,7 @@ export const projects = [
     github: 'https://github.com/yourusername/ecommerce',
     demo: 'https://ecommerce-demo.com',
     featured: true,
-    blogPost: '/notes/blog/building-ecommerce-platform'
+    blogPost: '/notes/blog/wip'
   },
   {
     title: 'Sentiment Analysis Tool',
@@ -63,6 +63,6 @@ export const projects = [
     github: 'https://github.com/yourusername/sentiment-analysis',
     demo: 'https://sentiment-analysis-demo.com',
     featured: false,
-    blogPost: '/notes/blog/creating-sentiment-analysis-tool'
+    blogPost: '/notes/blog/wip'
   }
 ]; 

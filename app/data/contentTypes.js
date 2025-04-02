@@ -11,30 +11,35 @@ export const ContentTypeInfo = {
     label: 'Blog Posts',
     description: 'Long-form articles about development, design, and technology',
     icon: '📝',
-    color: 'blue',
+    color: 'indigo',
+    directory: 'blog'
   },
   [ContentTypes.REPORT]: {
     label: 'Technical Reports',
     description: 'In-depth analysis, studies, and technical deep-dives',
     icon: '📊',
-    color: 'purple',
+    color: 'blue',
+    directory: 'reports'
   },
   [ContentTypes.TIF]: {
     label: 'Things I Found',
     description: 'Interesting discoveries, links, and quick thoughts',
     icon: '🔍',
-    color: 'green',
+    color: 'emerald',
+    directory: 'tif'
   },
   [ContentTypes.TIL]: {
     label: 'Things I Learned',
     description: 'Personal learnings and insights',
     icon: '💡',
-    color: 'yellow',
+    color: 'amber',
+    directory: 'til'
   },
   [ContentTypes.REVIEW]: {
     label: 'Reviews',
     description: 'Reviews of books, movies, videos, and games',
     icon: '⭐',
-    color: 'orange',
-  },
+    color: 'purple',
+    directory: 'reviews'
+  }
 }; 

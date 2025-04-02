@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { ContentTypeInfo, getContentMetadata, getAllContentAcrossTypes } from '@/app/lib/content';
+import { ContentTypeInfo, getContentMetadata, getAllContentAcrossTypes, getAllContentPaths, ContentTypes } from '@/app/lib/content';
 import Link from 'next/link';
 
 // Predefined color classes for each content type
@@ -18,6 +18,24 @@ const typeColorClasses = {
   'til': 'text-amber-600 dark:text-amber-400',
   'reviews': 'text-purple-600 dark:text-purple-400'
 };
+
+// Generate static params for all possible note paths
+export async function generateStaticParams() {
+  const paths = [];
+  
+  // Generate paths for each content type
+  for (const type of Object.values(ContentTypes)) {
+    const contentPaths = getAllContentPaths(type);
+    for (const { params: { slug } } of contentPaths) {
+      paths.push({
+        type,
+        slug
+      });
+    }
+  }
+
+  return paths;
+}
 
 export default async function NotePage({ params: { type, slug } }) {
   if (!ContentTypeInfo[type]) {

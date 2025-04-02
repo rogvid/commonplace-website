@@ -4,53 +4,9 @@ import matter from 'gray-matter';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
+import { ContentTypes, ContentTypeInfo } from '@/app/data/contentTypes';
 
-// Content type definitions (moved from notes.js)
-export const ContentTypes = {
-  BLOG: 'blog',
-  REPORT: 'report',
-  TIF: 'tif',
-  TIL: 'til',
-  REVIEW: 'review'
-};
-
-export const ContentTypeInfo = {
-  [ContentTypes.BLOG]: {
-    label: 'Blog Post',
-    description: 'Long-form articles and project deep-dives',
-    icon: '📝',
-    color: 'indigo',
-    directory: 'blog'
-  },
-  [ContentTypes.REPORT]: {
-    label: 'Report',
-    description: 'Technical reports, studies, papers, and analysis',
-    icon: '📊',
-    color: 'blue',
-    directory: 'reports'
-  },
-  [ContentTypes.TIF]: {
-    label: 'Things I Found',
-    description: 'Interesting discoveries and quick thoughts',
-    icon: '🔍',
-    color: 'emerald',
-    directory: 'tif'
-  },
-  [ContentTypes.TIL]: {
-    label: 'Things I Learned',
-    description: 'Learning notes and insights',
-    icon: '💡',
-    color: 'amber',
-    directory: 'til'
-  },
-  [ContentTypes.REVIEW]: {
-    label: 'Review',
-    description: 'Reviews of books, movies, videos, and games',
-    icon: '⭐',
-    color: 'purple',
-    directory: 'reviews'
-  }
-};
+export { ContentTypes, ContentTypeInfo };
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
@@ -162,4 +118,24 @@ export async function getAllContentAcrossTypes() {
 export async function getRecentContent(limit = 5) {
   const content = await getAllContentAcrossTypes();
   return content.slice(0, limit);
+}
+
+/**
+ * Get all possible paths for a content type
+ */
+export function getAllContentPaths(type) {
+  const typeInfo = ContentTypeInfo[type];
+  if (!typeInfo) throw new Error(`Invalid content type: ${type}`);
+
+  const typeDirectory = path.join(contentDirectory, typeInfo.directory);
+  if (!fs.existsSync(typeDirectory)) return [];
+
+  const files = fs.readdirSync(typeDirectory);
+  return files
+    .filter(file => file.endsWith('.mdx') || file.endsWith('.md'))
+    .map(file => ({
+      params: {
+        slug: file.replace(/\.mdx?$/, '')
+      }
+    }));
 } 

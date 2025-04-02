@@ -124,6 +124,14 @@ This website was developed using an innovative approach:
 
 4. Open [http://localhost:3000](http://localhost:3000)
 
+The development server provides all Next.js features including:
+- Hot Module Replacement (HMR)
+- Fast Refresh
+- Development-specific optimizations
+- Server-side features
+
+Note: The `output: 'export'` setting in `next.config.mjs` only affects the production build process and does not impact local development.
+
 ## Customization
 
 ### Styling
@@ -140,6 +148,31 @@ To add a new content type:
 1. Add the type to `ContentTypes` in `app/data/notes.js`
 2. Create the corresponding directory in `/content`
 3. Add type-specific styling in the Notes components
+
+## Deployment
+
+### CI/CD Setup
+
+The website uses GitHub Actions for automated deployment. When you push to the `main` branch, the following happens:
+
+1. The Next.js site is built as a static site
+2. The built files are automatically pushed to the `site` branch
+3. Hostinger automatically deploys from the `site` branch
+
+#### GitHub Actions Configuration
+
+The workflow is configured in `.github/workflows/deploy.yml` and uses:
+- `actions/checkout@v4` for repository checkout
+- `actions/setup-node@v4` for Node.js setup
+- `peaceiris/actions-gh-pages@v3` for pushing to the `site` branch
+
+No additional secrets are required as the workflow uses the automatically provided `GITHUB_TOKEN` secret.
+
+#### Hostinger Setup
+
+1. Connect your Hostinger hosting to the `site` branch of your repository
+2. Configure Hostinger to deploy from the `site` branch
+3. The deployment will happen automatically when the CI/CD pipeline pushes to the `site` branch
 
 ## License
 

@@ -6,11 +6,14 @@ import rehypePrism from 'rehype-prism-plus';
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   experimental: {
-    serverComponentsExternalPackages: ['gray-matter'],
-    serverActions: true,
+    serverComponentsExternalPackages: ['gray-matter']
   },
-  // Use standalone output for better optimization
-  output: 'standalone',
+  // Use static export for Hostinger deployment
+  output: 'export',
+  // Disable image optimization for static export
+  images: {
+    unoptimized: true
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // Don't resolve 'fs' module on the client to prevent this error
@@ -20,7 +23,7 @@ const nextConfig = {
       }
     }
     return config
-  },
+  }
 };
 
 const withMDX = createMDX({

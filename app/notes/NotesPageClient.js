@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ContentTypeInfo } from '../lib/content';
+import { ContentTypeInfo } from '@/app/data/contentTypes';
 
 export default function NotesPageClient({ initialContent }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,6 +30,39 @@ export default function NotesPageClient({ initialContent }) {
   const allFilteredContent = filteredContent
     .flatMap(section => section.content.map(post => ({ ...post, type: section.type })))
     .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const colorMap = {
+    blog: {
+      selected: 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-700',
+      hover: 'hover:border-indigo-200 dark:hover:border-indigo-700',
+      text: 'text-indigo-600 dark:text-indigo-400',
+      tag: 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400',
+    },
+    reports: {
+      selected: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700',
+      hover: 'hover:border-blue-200 dark:hover:border-blue-700',
+      text: 'text-blue-600 dark:text-blue-400',
+      tag: 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400',
+    },
+    tif: {
+      selected: 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-700',
+      hover: 'hover:border-emerald-200 dark:hover:border-emerald-700',
+      text: 'text-emerald-600 dark:text-emerald-400',
+      tag: 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400',
+    },
+    til: {
+      selected: 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-700',
+      hover: 'hover:border-amber-200 dark:hover:border-amber-700',
+      text: 'text-amber-600 dark:text-amber-400',
+      tag: 'bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400',
+    },
+    reviews: {
+      selected: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-700',
+      hover: 'hover:border-purple-200 dark:hover:border-purple-700',
+      text: 'text-purple-600 dark:text-purple-400',
+      tag: 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400',
+    },
+  };
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900">
@@ -59,7 +92,7 @@ export default function NotesPageClient({ initialContent }) {
                   onClick={() => setSelectedType(isSelected ? '' : type)}
                   className={`p-4 rounded-xl border transition-all duration-200 text-left
                     ${isSelected 
-                      ? `bg-${info.color}-50 dark:bg-${info.color}-900/20 border-${info.color}-200 dark:border-${info.color}-700`
+                      ? colorMap[type].selected
                       : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                     }`}
                 >
@@ -118,17 +151,17 @@ export default function NotesPageClient({ initialContent }) {
                 href={`/notes/${post.type}/${post.slug}`}
                 className={`group block bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg 
                   transition-all duration-200 overflow-hidden border border-gray-100 dark:border-gray-700
-                  hover:border-${info.color}-200 dark:hover:border-${info.color}-700`}
+                  ${colorMap[post.type].hover}`}
               >
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-lg">{info.icon}</span>
-                    <span className={`text-sm font-medium text-${info.color}-600 dark:text-${info.color}-400`}>
+                    <span className={`text-sm font-medium ${colorMap[post.type].text}`}>
                       {info.label}
                     </span>
                   </div>
                   <h3 className={`text-xl font-semibold mb-2 text-gray-900 dark:text-white 
-                    group-hover:text-${info.color}-600 dark:group-hover:text-${info.color}-400 transition-colors`}>
+                    group-hover:${colorMap[post.type].text} transition-colors`}>
                     {post.title}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
@@ -149,8 +182,7 @@ export default function NotesPageClient({ initialContent }) {
                       {post.tags.map((tag) => (
                         <span
                           key={tag}
-                          className={`px-2.5 py-0.5 bg-${info.color}-50 dark:bg-${info.color}-900/20 
-                            text-${info.color}-600 dark:text-${info.color}-400 rounded-full text-sm`}
+                          className={`px-2.5 py-0.5 ${colorMap[post.type].tag} rounded-full text-sm`}
                         >
                           {tag}
                         </span>
