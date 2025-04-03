@@ -10,6 +10,7 @@ const nextConfig = {
   },
   // Use static export for Hostinger deployment
   output: 'export',
+  trailingSlash: true,
   // Disable image optimization for static export
   images: {
     unoptimized: true
@@ -33,4 +34,4 @@ const withMDX = createMDX({
   },
 });
 
-export default withMDX(nextConfig); 
+export default withMDX(nextConfig);
